@@ -65,6 +65,7 @@ general internet uplink from software because its SIM is dead.
 | 12 | [RE targets](docs/12-re-targets.md) | DMS driver‑monitor, body control, cluster/HUD — reachability‑probed |
 | 13 | [Vehicle 3D assets](docs/13-vehicle-3d-assets.md) | Interactive 3D car illusion: 91-frame 360° flipbook architecture on TextureView |
 | 14 | [Tooling](docs/14-tooling.md) | REA/JADX/Ghidra setup, apktool, and build pipeline |
+| 15 | [CarConfig & feature unlocking](docs/15-carconfig-and-feature-unlocking.md) | Feature gating, EOL 210-bitfield schema, Wireless CarPlay/Android Auto, ADAS unlocking, and multi-brand theming |
 
 ---
 
@@ -73,6 +74,7 @@ general internet uplink from software because its SIM is dead.
 | Script | What it does |
 |--------|-------------|
 | [`scripts/chery_engmode_tool.py`](scripts/chery_engmode_tool.py) | **Engineering mode password & crypto toolkit.** Computes eng mode dialog passwords across cybersecurity modes (standard static multiplier, live random challenge, Version 3.0 AES-CMAC), decrypts/crafts `EngSecKey.txt` payloads using hardcoded AES keys, and validates date-scoped RSA `adbauth.key` signatures. |
+| [`scripts/chery_carconfig_tool.py`](scripts/chery_carconfig_tool.py) | **Vehicle configuration & feature unlocking CLI.** Decodes 210 EOL bitfield configuration IDs, crafts modified vehicle persist properties (`configs1..7`, `combo.config`), unlocks Wireless CarPlay / Android Auto / CarLink, enables full ADAS suite, and toggles global brand themes (Chery, OMODA, JAECOO, EBRO). |
 | [`scripts/exploit_chain.sh`](scripts/exploit_chain.sh) | **Automated DoIP root exploit execution shell script.** Step-by-step implementation and documentation mapping raw packet stages to binary analysis findings. |
 | [`scripts/adbdctl`](scripts/adbdctl) | **Vendor adbd control script.** Dumped vendor shell script demonstrating property toggling for `persist.sv.debug.adb_enable`. |
 | [`scripts/doip_root_exploit.py`](scripts/doip_root_exploit.py) | **Root via UDS/DoIP arbitrary file write.** Connects to `uds_doip_server` (root, TCP 13400), which has authentication entirely stubbed out (`DoIP_IsAuthRequired()→0`, `DoIP_IsAuthenticated()→1`). Unlocks SecurityAccess level 0x35 — the seed→key algorithm is trivial two's complement (`key = -seed`). Then uses UDS RequestFileTransfer (SID 0x38) to write your ADB public key to `/data/misc/adb/adb_keys` as root, giving persistent ADB access. Requires ADB shell access (Phase 1) as a precondition. |
