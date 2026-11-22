@@ -1,7 +1,6 @@
 # 09 — DVR / 360 cameras
 
-Goal that drove this: build an app that extends the **360‑camera DVR** (the one *"Driver Settings"*
-/ MyCar surfaces). The short answer is that true‑360 capture is hard because the bird's‑eye
+Goal that drove this: build an app that extends the **360‑camera DVR**. The short answer is that true‑360 capture is hard because the bird's‑eye
 composite is not produced on the Android SoC at all.
 
 ## Architecture (confirmed on‑device)

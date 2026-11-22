@@ -27,7 +27,7 @@ Two internal networks matter:
 - **`192.168.8.0/24` — the vehicle fabric.**
   - `192.168.8.2` = this Android IVI node.
   - `192.168.8.1` = the peer SoC / MCU gateway. This is where the **MCU control socket**
-    (`:10004`, see [03](03-mycar-app-and-hal.md)) and an unexplored **MCU HTTP service**
+    (`:10004`, see [03](03-mcu-wire-protocol.md)) and an unexplored **MCU HTTP service**
     (`:60004`) live, and where the SPI‑to‑Ethernet vehicle‑bus bridge terminates.
   - The internal **FTP server** listens on `192.168.8.2:2121` ([08](08-ftp-server.md)).
 - **`192.168.225.0/24` — the T‑Box RNDIS/NAT link.** `usb0` on the IVI is `192.168.225.10/24`

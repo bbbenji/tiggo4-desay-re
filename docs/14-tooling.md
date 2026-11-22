@@ -5,8 +5,8 @@ What was used to produce the rest of this repo.
 ## Reverse engineering
 
 - **REA** (`rea-agents`) as an MCP server, wired to two providers:
-  - **Ghidra 12.1.2** — native binaries (`libhalctl.so`, `libloader.so`, `libdesaysv_vehiclebus.so`,
-    the SOME/IP client proxies).
+  - **Ghidra 12.1.2** — native binaries (`uds_doip_server`, `libdesaysv_doip_server.so`,
+    `libdesaysv_vehiclebus.so`, the SOME/IP client proxies).
   - **JADX headless 0.7.1** — Android APK classes/methods/xrefs.
 - **apktool** — smali/resource decode (this is how the cleartext command catalog
   [`COMMAND-CATALOG.md`](COMMAND-CATALOG.md) was pulled from `SVEngMode.apk`).
@@ -20,8 +20,6 @@ What was used to produce the rest of this repo.
   `logcat` capture (how the ambient and eng‑mode protocols were decoded live), `am start` / `input`
   to drive UI, `pm` / `appops` / `getprop`, `dumpsys`, `uiautomator dump` (`screencap` is blocked on
   the `user` build).
-- **frida / frida‑dexdump** — the intended MyCar‑unpack route; blocked on this unit for lack of
-  root (and the packer detects Frida anyway, [03](03-mycar-app-and-hal.md)).
 
 ## Building sideloaded APKs (no Gradle)
 

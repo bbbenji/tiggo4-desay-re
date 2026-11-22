@@ -23,8 +23,8 @@ Captured by `logcat`‑watching the **official** vehicle‑settings app
   - Sub‑op byte is `0x16` on the live car (an earlier capture showed `0x17`; firmware/path differ).
   - The official app sends it as a **2‑frame pair**.
 
-This is exactly what `libhalctl` would wrap: `HalCtl.send(0x3D01, payload8)` → the `{{…}}` frame in
-[03](03-mycar-app-and-hal.md).
+This is the exact wire packet format: opcode `0x3D01` with `payload8` → the `{{…}}` frame documented in
+[03](03-mcu-wire-protocol.md).
 
 ## Path 1 — VDBus CAR_SETTING (the "correct" API)
 
@@ -39,7 +39,7 @@ This is the general VDBus‑write no‑op, not an ambient‑specific quirk.
 
 ## Path 2 — the MCU socket `192.168.8.1:10004`
 
-MyCar's route. The socket **connects** from an unprivileged app and the `0x3D01` frame is
+Direct socket route. The socket **connects** from an unprivileged app and the `0x3D01` frame is
 byte‑perfect (verified with both a Java `Socket` and `/proc/net/tcp` state `01` from shell).
 
 **Verdict: no effect on this unit.** Sending the byte‑perfect `0x3D01` frame — single and bursted

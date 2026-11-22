@@ -53,7 +53,7 @@ general internet uplink from software because its SIM is dead.
 | 00 | [Safety & legal](docs/00-safety-and-legal.md) | Scope, ownership, what's dangerous, redactions |
 | 01 | [Hardware & platform](docs/01-hardware-platform.md) | SoC, partitions, internal networks, boot/security posture |
 | 02 | [ADB access](docs/02-adb-access.md) | The clock‑rollback + saved‑key method to re‑enable ADB; root verdict |
-| 03 | [MyCar app & the HAL socket](docs/03-mycar-app-and-hal.md) | The packed companion app, its native DEX packer, and the `:10004` MCU wire protocol |
+| 03 | [MCU wire protocol & socket](docs/03-mcu-wire-protocol.md) | The direct `:10004` MCU wire protocol, frame format, and hardware bridge |
 | 04 | [VDBus untrusted access](docs/04-vdbus-untrusted-access.md) | The central unlock: reading the vehicle bus from a normal app |
 | 05 | [Command & signal catalog](docs/05-command-catalog.md) | Module map, signal IDs, how addressing works |
 | 06 | [Ambient lighting](docs/06-ambient-light.md) | The `0x3D01` ambient protocol, three control paths, and why writes didn't take |

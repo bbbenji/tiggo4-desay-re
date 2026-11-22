@@ -1,5 +1,5 @@
 # Chery Tiggo 4 (2025) DeSay SV — Vehicle Command Catalog
-_Extracted from SVEngMode.apk smali (cleartext). name = numeric ID. These are the VD/CarInfo command IDs the MyCar app wraps._
+_Extracted from SVEngMode.apk smali (cleartext). name = numeric ID. These are the VD/CarInfo command IDs used across the DeSay IVI system._
 
 ## AvmID (4)
   ID_AVM_DISPLAY = 0x8
@@ -2736,8 +2736,8 @@ _From SVEngMode smali com/desaysv/ivi/vdb/event/id/*_
   MIN = 0x130000
 
 
-# CabinLan wire protocol (Android<->QNX bridge, SVVDSCarLan) — the family MyCar's libhalctl mimics
-_MyCar: {{cmd,payload}} to 192.168.8.1:10004 (its own libhalctl bridge). DeSay CabinLan: SOME/IP to 192.168.225.1:16000 (PORT 0x3e80). DIFFERENT endpoints/ports = parallel bridges; MyCar is NOT the DeSay CabinLan path._
+# CabinLan wire protocol (Android<->QNX bridge, SVVDSCarLan)
+_MCU Socket: {{cmd,payload}} to 192.168.8.1:10004. DeSay CabinLan: SOME/IP to 192.168.225.1:16000 (PORT 0x3e80). DIFFERENT endpoints/ports = parallel bridges._
 
 ## Cabin_LAN_MSG_Type (channel; A2Q=control, Q2A=status)
 ### Cabin_LAN_MSG_Type

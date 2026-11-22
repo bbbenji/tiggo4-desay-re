@@ -14,7 +14,7 @@ actuate this vehicle** — see the box at the bottom.
 
 This permission is *defined by* `SVVDSUpgrade` with `android:protectionLevel="normal"` (verified:
 aapt `type 0x11)0x0`). `normal` → **auto‑granted at install**, no signature match, no prompt.
-MyCar (a sideloaded `untrusted_app`) holds only this one permission and works; so does TurboDog, a
+Any sideloaded app (`untrusted_app`) holding this single permission can access the bus; so does TurboDog, a
 `/product/app` performance meter.
 
 **2. Bind the VDS module service with an explicit Intent** (package + action). These services are
