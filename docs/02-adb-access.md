@@ -41,9 +41,12 @@ ADB comes up as **shell (uid 2000, in the `log` group), not root.** `adb root` i
 - set a global HTTP proxy, reach `192.168.8.1:10004` and the internal net,
 - `pm install` / `pm list` / `appops` / `getprop`.
 
-You **cannot**:
+You **cannot (via standard ADB alone)**:
 
-- `adb root` or otherwise get uid 0 — so you cannot dump the packed MyCar DEX
-  ([03](03-mycar-app-and-hal.md)), read `/data/data/*` of other apps, or touch `/vendor/lib64`.
+- `adb root` directly — production build (`ro.secure=1`, `ro.debuggable=0`) refuses `adb root`.
+  Getting UID 0 requires privilege escalation via the DoIP diagnostic exploit (see
+  [`scripts/doip_root_exploit.py`](../scripts/doip_root_exploit.py) and [FIELD-GUIDE.md](FIELD-GUIDE.md)),
+  after which root file manipulation and full UID 0 execution become possible.
+- Directly read `/data/data/*` of other private apps or touch `/vendor/lib64` without escalating to root first.
 - Start non‑exported engineering sub‑activities to bypass the password gate — tried, it throws
   `SecurityException: not exported from uid 1000` ([11](11-hidden-functionality.md)).
