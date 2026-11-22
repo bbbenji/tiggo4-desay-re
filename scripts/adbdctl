@@ -1,0 +1,19 @@
+#!/system/bin/sh
+
+usage ()
+{
+	echo "Usage: "
+	echo "	adbdctl start		-- start adb"
+	echo "	adbdctl stop		-- stop  adb"
+}
+
+if [ "$1" = "--help" ]; then
+	usage
+elif [ "$1" = "start" ] || [ -z "$1" ]; then
+	setprop persist.sv.debug.adb_enable 1
+        echo "adb start"
+elif [ "$1" = "stop" ]; then
+	setprop persist.sv.debug.adb_enable 0
+	echo "adb stop"
+fi
+

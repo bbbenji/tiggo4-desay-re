@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Protocols>
+    <Protocol prop_id="21417523" func_id="20">
+	<MediaSource>26</MediaSource>
+	<NaviSource>27</NaviSource>
+	<PhoneSource>25</PhoneSource>
+	<EcallSource>25</EcallSource>
+	<VoiceSource>28</VoiceSource>
+	<TtsSource>29</TtsSource>
+	<KeyToneSource>30</KeyToneSource>
+	<BeepSource>5</BeepSource>
+	<MediaVolume>2</MediaVolume>
+	<NaviVolume>4</NaviVolume>
+	<PhoneVolume>3</PhoneVolume>
+	<ICMVolume>7</ICMVolume>
+	<RadarVolume>9</RadarVolume>
+	<TTSVolume>12</TTSVolume>
+	<MaxDefaultVolume>11</MaxDefaultVolume>
+	<BTMediaVolume>31</BTMediaVolume>
+	<WelVolume>32</WelVolume>
+	<EseVolume>33</EseVolume>
+	<Balance>19</Balance>
+	<Fader>18</Fader>
+	<Bass>23</Bass>
+	<Middle>21</Middle>
+	<Treble>22</Treble>
+	<SdvcLevel>6</SdvcLevel>
+	<SoundEffectSurround>17</SoundEffectSurround>
+	<SoundEffectSeat>14</SoundEffectSeat>
+	<SoundEffectLoudness>16</SoundEffectLoudness>
+	<SoundEffectWave>13</SoundEffectWave>	
+	<SoundEffectAcoustic>20</SoundEffectAcoustic>
+	<SoundEffectCompensation>-1</SoundEffectCompensation>
+	<MediaMute>8</MediaMute>
+	<RearMediaMute>-1</RearMediaMute>
+	<HdrestSpkrMod>34</HdrestSpkrMod>
+        <ENCSound>36</ENCSound>
+    </Protocol>
+</Protocols>
