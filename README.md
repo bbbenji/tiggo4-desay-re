@@ -68,6 +68,15 @@ general internet uplink from software because its SIM is dead.
 
 ---
 
+## Scripts
+
+| Script | What it does |
+|--------|-------------|
+| [`scripts/doip_root_exploit.py`](scripts/doip_root_exploit.py) | **Root via UDS/DoIP arbitrary file write.** Connects to `uds_doip_server` (root, TCP 13400), which has authentication entirely stubbed out (`DoIP_IsAuthRequired()→0`, `DoIP_IsAuthenticated()→1`). Unlocks SecurityAccess level 0x35 — the seed→key algorithm is trivial two's complement (`key = -seed`). Then uses UDS RequestFileTransfer (SID 0x38) to write your ADB public key to `/data/misc/adb/adb_keys` as root, giving persistent ADB access. Requires ADB shell access (Phase 1) as a precondition. |
+| [`scripts/full_extract.py`](scripts/full_extract.py) | **Full headunit data extraction** — four‑phase pipeline that combines shell‑level ADB pulls with DoIP root writes. **Phase 1:** pulls everything readable as shell UID — build props, init scripts, SELinux policy, all installed APKs, `dumpsys`/`logcat`/`dmesg` output, etc. **Phase 2:** uses DoIP to write an ADB pubkey, a root extraction shell script, and a proof file. **Phase 3:** attempts root execution of the extraction script (direct if adbd is root, otherwise via property‑trigger services). **Phase 4:** pulls root‑extracted data — keystore, WiFi/BT config, app databases (DeSay engmode/vehicle/systemui, Carota OTA), persistent properties, vendor/CAN bus data, logs, SELinux policy, and partition layout. Use `--skip-doip` for shell‑only extraction or `--doip-only` for just the root writes. |
+
+---
+
 ## Status & honesty notes
 
 This is a working log, not a vendor manual. Where a value is marked *tentative*, *unconfirmed*
