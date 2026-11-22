@@ -64,7 +64,7 @@ general internet uplink from software because its SIM is dead.
 | 11 | [Hidden functionality map](docs/11-hidden-functionality.md) | Suite‑wide hidden/engineering/access surfaces |
 | 12 | [RE targets](docs/12-re-targets.md) | DMS driver‑monitor, body control, cluster/HUD — reachability‑probed |
 | 13 | [Vehicle 3D assets](docs/13-vehicle-3d-assets.md) | Where the "3D car" visuals actually live |
-| 14 | [Tooling](docs/14-tooling.md) | REA/JADX/Ghidra setup, apktool, and a note on the MTLive dashcam installer |
+| 14 | [Tooling](docs/14-tooling.md) | REA/JADX/Ghidra setup, apktool, and build pipeline |
 
 ---
 
@@ -76,7 +76,7 @@ general internet uplink from software because its SIM is dead.
 | [`scripts/exploit_chain.sh`](scripts/exploit_chain.sh) | **Automated DoIP root exploit execution shell script.** Step-by-step implementation and documentation mapping raw packet stages to binary analysis findings. |
 | [`scripts/adbdctl`](scripts/adbdctl) | **Vendor adbd control script.** Dumped vendor shell script demonstrating property toggling for `persist.sv.debug.adb_enable`. |
 | [`scripts/doip_root_exploit.py`](scripts/doip_root_exploit.py) | **Root via UDS/DoIP arbitrary file write.** Connects to `uds_doip_server` (root, TCP 13400), which has authentication entirely stubbed out (`DoIP_IsAuthRequired()→0`, `DoIP_IsAuthenticated()→1`). Unlocks SecurityAccess level 0x35 — the seed→key algorithm is trivial two's complement (`key = -seed`). Then uses UDS RequestFileTransfer (SID 0x38) to write your ADB public key to `/data/misc/adb/adb_keys` as root, giving persistent ADB access. Requires ADB shell access (Phase 1) as a precondition. |
-| [`scripts/full_extract.py`](scripts/full_extract.py) | **Full headunit data extraction** — four‑phase pipeline that combines shell‑level ADB pulls with DoIP root writes. **Phase 1:** pulls everything readable as shell UID — build props, init scripts, SELinux policy, all installed APKs, `dumpsys`/`logcat`/`dmesg` output, etc. **Phase 2:** uses DoIP to write an ADB pubkey, a root extraction shell script, and a proof file. **Phase 3:** attempts root execution of the extraction script (direct if adbd is root, otherwise via property‑trigger services). **Phase 4:** pulls root‑extracted data — keystore, WiFi/BT config, app databases (DeSay engmode/vehicle/systemui, Carota OTA), persistent properties, vendor/CAN bus data, logs, SELinux policy, and partition layout. Use `--skip-doip` for shell‑only extraction or `--doip-only` for just the root writes. |
+| [`scripts/full_extract.py`](scripts/full_extract.py) | **Full headunit data extraction** — four‑phase pipeline that combines shell‑level ADB pulls with DoIP root writes. **Phase 1:** pulls everything readable as shell UID — build props, init scripts, SELinux policy, all installed APKs, `dumpsys`/`logcat`/`dmesg` output, etc. **Phase 2:** uses DoIP to write an ADB pubkey, a root extraction shell script, and a proof file. **Phase 3:** attempts root execution of the extraction script (direct if adbd is root, otherwise via property‑trigger services). **Phase 4:** pulls root‑extracted data — keystore, WiFi/BT config, app databases (DeSay engmode/vehicle/systemui), persistent properties, vendor/CAN bus data, logs, SELinux policy, and partition layout. Use `--skip-doip` for shell‑only extraction or `--doip-only` for just the root writes. |
 
 ---
 

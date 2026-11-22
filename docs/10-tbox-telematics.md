@@ -93,5 +93,5 @@ URL** (a designed exfil path).
 **mutual‑TLS (device client cert in the T‑Box) + private `*.cadp` DNS**. With the T‑Box SIM dead,
 the car makes no online FOTA request to spoof, and the path is cert‑gated anyway. Firmware
 acquisition = **dealer / local USB `.cbf`** only (signed, verified by
-`security_upgrade_public_key.txt`). The sideloaded `com.carota.chery` agent is a foreign
-Jaecoo/Omoda app and is non‑functional on this unit.
+`security_upgrade_public_key.txt`).
+

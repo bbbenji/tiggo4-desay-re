@@ -47,15 +47,3 @@ You **cannot**:
   ([03](03-mycar-app-and-hal.md)), read `/data/data/*` of other apps, or touch `/vendor/lib64`.
 - Start non‑exported engineering sub‑activities to bypass the password gate — tried, it throws
   `SecurityException: not exported from uid 1000` ([11](11-hidden-functionality.md)).
-
-### Independent confirmation of the ADB/root provisioning pattern
-
-The third‑party MTLive "MDashCam" installer (see [14](14-tooling.md)) drives Chery head units over
-ADB and uses exactly this shape: raw `shell:<cmd>` plus `su root sh -c '<cmd>'`, with a compat gate
-that requires `id` to return `uid=0`. On **this** Tiggo 4 that gate fails (no root), which is
-consistent with everything above — that tool targets Tiggo 7/8 Pro + Omoda 5 variants that may ship
-a root‑adb (userdebug) build. Test any unit with:
-
-```bash
-adb shell "su root sh -c 'id'"   # uid=0 -> rootable adbd; otherwise not
-```

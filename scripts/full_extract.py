@@ -224,7 +224,6 @@ for db in \
     /data/data/com.android.providers.settings/databases/settings.db \
     /data/data/com.android.providers.contacts/databases/*.db \
     /data/data/com.android.providers.telephony/databases/*.db \
-    /data/data/com.carota.chery/databases/*.db \
     /data/user_de/0/com.android.providers.settings/databases/settings.db \
 ; do
     [ -f "$db" ] || continue
@@ -236,7 +235,6 @@ done
 for sp in \
     /data/data/com.desaysv.engmode/shared_prefs/*.xml \
     /data/data/com.desaysv.vehicle/shared_prefs/*.xml \
-    /data/data/com.carota.chery/shared_prefs/*.xml \
 ; do
     [ -f "$sp" ] || continue
     base=$(echo "$sp" | tr '/' '_')

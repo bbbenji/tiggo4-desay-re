@@ -116,10 +116,6 @@ System-UID lets us setprop into any context whose write ACL includes `system_app
 
 `unit-dump/tars/system_etc.tar :: etc/init/desaysv_adber.rc` runs `/system/bin/desaysv_adber` as `user root group root seclabel u:r:adbd:s0`. Binary is not shipped. `logcat-session.txt` shows it running and repeatedly `avc denied { read } ... ro_desay_cybersecurity` — i.e. it reads `ro.desay.cybersecurity` to branch on cybersecurity state. If its branch drops to a `user root` adb lane when the flag is low, and the flag is itself a property, that's a bypass. Not currently usable from this dump because the binary is missing, but worth submitting as a flag.
 
-### H. OTA client (`com.carota.chery`) — `android.uid.system`
-
-`unit-dump/data-app/com.carota.chery/base.apk` — runs as `android.uid.system` (sharedUserId in manifest). Has an **exported `DebugActivity` with no permission guard** (`com.carota.chery.ui.debug.DebugActivity`). Launchable via `am start -n com.carota.chery/.ui.debug.DebugActivity`. The activity reads `/fake/session.json` and `/fake/vehicle_config.json` to simulate OTA flows — test UI left in production. However, no `Runtime.exec()` or `ProcessBuilder` calls found in the smali, so it cannot be leveraged for command execution. `ModeReceiver` is exported but `enabled=false`.
-
 ### I. Shell-writable paths
 
 From `vendor_sepolicy.cil`:
@@ -313,7 +309,6 @@ All 5 UDS security levels reimplemented (0x01, 0x07, 0x19, 0x29, 0x35).
 | 7 | `/vendor/bin/adbdctl` authless setprop wrapper (blocked by SELinux from shell) | Medium | vendor.tar extraction |
 | 8 | `shell_30_0` can setprop `system_prop_30_0` → root services | High | vendor_sepolicy.cil |
 | 9 | `car.vdb.adaptor.trigger` has no property_context → `default_prop`, injectable via DoIP file write | High | vendor_property_contexts + init.desaysv.vehicle.extra.rc |
-| 10 | `com.carota.chery` (OTA client, `android.uid.system`) has exported `DebugActivity` with no permission | Medium | AndroidManifest.xml |
 | 11 | `/system`, `/vendor` are dm-verity read-only — write targets limited to `/data`, `/persist`, `/log` | Info | mounts.txt |
 | 12 | RSA public key for security upgrades exposed in `security_upgrade_public_key.txt` | Medium | etc_vendor/ |
 | 13 | `DesaySVProjectService` exported services (system_uid, no permission) → VDB injection | Medium | system_priv-app/DesaySVProjectService |

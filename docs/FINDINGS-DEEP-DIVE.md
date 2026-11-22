@@ -62,21 +62,6 @@ with unconstrained file access, it can write to `/data/property/persistent_prope
 to inject `persist.sv.debug.adb_enable=1`. After reboot, init loads the file and
 the property takes effect. This bypasses the entire EngMode UI flow.
 
-## 4. OTA Client (`com.carota.chery`) Attack Surface
-
-- **System UID**: `android.uid.system`
-- **DebugActivity**: Exported with NO permission guard. Click handlers simulate OTA states
-  (AccOff, Battery, Fire, Schedule, Install, etc.) — a testing UI left in production.
-  Launchable via: `am start -n com.carota.chery/.ui.debug.DebugActivity`
-- **VehicleServiceImpl**: Exported, requires `ota.permission.VEHICLE`
-- **ModeReceiver**: Exported, disabled
-- **Internal URLs**: `http://ota_subde/*` endpoints (resolved on internal vehicle network):
-  `/apply`, `/cdt`, `/dquery`, `/events`, `/guard`, `/logs`
-- **PKI gateway**: `https://pkipgw` — certificate infrastructure endpoint
-
-The DebugActivity cannot enable ADB directly but can simulate OTA conditions that may
-trigger reboots or mode changes.
-
 ## 5. DesaySVProjectService — Exported Services
 
 - `ProjectionService`: exported, no permission
@@ -119,7 +104,6 @@ found. They handle phone projection (CarPlay/Android Auto) display management.
 
 ### Needs further testing on live device:
 2. **VDB inject from shell** — any VDB event injectable, but ADB-specific handler has a broken gate
-3. **DebugActivity** — OTA debug UI accessible without permission, may trigger state changes
 4. **UpperTester** — network interface manipulation from shell
 
 ### Additional system-UID network services:
