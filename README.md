@@ -53,7 +53,7 @@ general internet uplink from software because its SIM is dead.
 | 00 | [Safety & legal](docs/00-safety-and-legal.md) | Scope, ownership, what's dangerous, redactions |
 | 01 | [Hardware & platform](docs/01-hardware-platform.md) | SoC, partitions, internal networks, boot/security posture |
 | 02 | [ADB access](docs/02-adb-access.md) | The clock‑rollback + saved‑key method to re‑enable ADB; root verdict |
-| 03 | [MCU wire protocol & socket](docs/03-mcu-wire-protocol.md) | The direct `:10004` MCU wire protocol, frame format, and hardware bridge |
+| 03 | [MCU wire protocol & socket](docs/03-mcu-wire-protocol.md) | Disassembly of `remote.spi2ethenet.default.so` & `librmtadapter_vehicle.so`: wire framing (`{{...}}`), `0x5501` init, `0x0205`/`0x511C` keepalive, and `0x7523`/`0x7353` VDBus command & telemetry dictionaries |
 | 04 | [VDBus untrusted access](docs/04-vdbus-untrusted-access.md) | The central unlock: reading the vehicle bus from a normal app |
 | 05 | [Command & signal catalog](docs/05-command-catalog.md) | Module map, signal IDs, how addressing works |
 | 06 | [Ambient lighting](docs/06-ambient-light.md) | The `0x3D01` ambient protocol, three control paths, and why writes didn't take |
@@ -74,6 +74,7 @@ general internet uplink from software because its SIM is dead.
 | Script | What it does |
 |--------|-------------|
 | [`scripts/chery_engmode_tool.py`](scripts/chery_engmode_tool.py) | **Engineering mode password & crypto toolkit.** Computes eng mode dialog passwords across cybersecurity modes (standard static multiplier, live random challenge, Version 3.0 AES-CMAC), decrypts/crafts `EngSecKey.txt` payloads using hardcoded AES keys, and validates date-scoped RSA `adbauth.key` signatures. |
+| [`scripts/chery_mcu_tool.py`](scripts/chery_mcu_tool.py) | **MCU wire protocol dissector & packet crafting CLI.** Dissects framed (`{{...}}`) and unadorned hex packets from logcat or raw dumps, parses Subsystem and Opcode headers (`0x7523`, `0x7353`, `0x40FF`, `0x0205`), decodes vehicle telemetry engineering units (12V battery voltage in volts, HV SOC/SOH %, HVAC states), crafts valid on-wire framed command packets, and streams live logcat traffic analysis. |
 | [`scripts/chery_carconfig_tool.py`](scripts/chery_carconfig_tool.py) | **Vehicle configuration & feature unlocking CLI.** Decodes 210 EOL bitfield configuration IDs, crafts modified vehicle persist properties (`configs1..7`, `combo.config`), unlocks Wireless CarPlay / Android Auto / CarLink, enables full ADAS suite, and toggles global brand themes (Chery, OMODA, JAECOO, EBRO). |
 | [`scripts/exploit_chain.sh`](scripts/exploit_chain.sh) | **Automated DoIP root exploit execution shell script.** Step-by-step implementation and documentation mapping raw packet stages to binary analysis findings. |
 | [`scripts/adbdctl`](scripts/adbdctl) | **Vendor adbd control script.** Dumped vendor shell script demonstrating property toggling for `persist.sv.debug.adb_enable`. |
