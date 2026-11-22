@@ -63,7 +63,7 @@ general internet uplink from software because its SIM is dead.
 | 10 | [T‑Box & telematics](docs/10-tbox-telematics.md) | Connectivity, the Chery TSP/PKI phone‑home map, and blocking it |
 | 11 | [Hidden functionality map](docs/11-hidden-functionality.md) | Suite‑wide hidden/engineering/access surfaces |
 | 12 | [RE targets](docs/12-re-targets.md) | DMS driver‑monitor, body control, cluster/HUD — reachability‑probed |
-| 13 | [Vehicle 3D assets](docs/13-vehicle-3d-assets.md) | Where the "3D car" visuals actually live |
+| 13 | [Vehicle 3D assets](docs/13-vehicle-3d-assets.md) | Interactive 3D car illusion: 91-frame 360° flipbook architecture on TextureView |
 | 14 | [Tooling](docs/14-tooling.md) | REA/JADX/Ghidra setup, apktool, and build pipeline |
 
 ---
